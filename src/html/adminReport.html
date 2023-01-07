@@ -1,19 +1,19 @@
 ${doNotShowDialog !== true ? `
 <!-- Only show on our own dialog -->
-<h2 style="font-weight: 200;font-size:45px;line-height: 48px;">Report to AIV</h2>
+<h2 style="font-weight: 200;font-size:45px;line-height: 48px;">举报破坏/h2>
 ` :``}
 <span>
     <!-- shows different text in production and debug modes -->
-    ${rw.debugMenu == null ? `AIV is intended only <b>for reports about active, obvious, and persistent vandals and spammers.</b>
-    When appropriate, assume good faith and ensure you have warned an editor before reporting to AIV.`:
-    `<span style="color:red">You are in developer mode, so AIV reports will be sent to User:Chlod/playground. Enable production behaviour through the debug menu.</span>`}
+    ${rw.debugMenu == null ? `只有<b>活跃、明显、持久的破坏者</b>才适合举报。
+    请在举报之前确认此用户已受警告。`:
+    `<span style="color:red">您正处于开发者模式。破坏举报会被送往 用户:Aaron Liu/游乐场。可到调试菜单启用正常行为。</span>`}
 </span>
 <form id="AIVreportForm">
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
         <input class="mdl-textfield__input" type="text" id="trgtUsrVisualBox" value="${rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")}" name="target" readonly>
-        <label class="mdl-textfield__label" for="trgtUsrVisualBox">Target</label>
+        <label class="mdl-textfield__label" for="trgtUsrVisualBox">被举报者</label>
         <div class="mdl-tooltip" for="trgtUsrVisualBox">
-            To target a different user, please visit their userpage.
+            如果你要举报另一个用户，请到 TA 们的用户页。
         </div>
     </div>
 
@@ -21,9 +21,9 @@ ${doNotShowDialog !== true ? `
         <input type="text" value="" class="mdl-textfield__input" id="reasonInput" name="reason" readonly> <!-- USE REASON TO GET THE DATA, NOT REASON INPUT.-->
         <input type="hidden" value="" name="reasonInput"> <!-- THIS WILL ALWAYS BE BLANK.-->
         <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-        <label for="reasonInput" class="mdl-textfield__label">Reason</label>
+        <label for="reasonInput" class="mdl-textfield__label">举报理由</label>
         <ul for="reasonInput" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="height: 100px; overflow:auto;">
-            <li class="mdl-menu__item" data-val="">Vandalism after final warning</li>
+            <li class="mdl-menu__item" data-val="">最后警告之后进行破坏</li>
             <li class="mdl-menu__item" data-val="">Vandalism within 1 day of being unblocked</li>
             <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `Evidently only vandalising pages` : `Evidently a vandalism-only account`}</li>
             <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `Evidently only making promotional edits` : `Account is a promotion-only account`}</li>
