@@ -24,19 +24,19 @@ ${doNotShowDialog !== true ? `
         <label for="reasonInput" class="mdl-textfield__label">举报理由</label>
         <ul for="reasonInput" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" style="height: 100px; overflow:auto;">
             <li class="mdl-menu__item" data-val="">最后警告之后进行破坏</li>
-            <li class="mdl-menu__item" data-val="">Vandalism within 1 day of being unblocked</li>
-            <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `Evidently only vandalising pages` : `Evidently a vandalism-only account`}</li>
-            <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `Evidently only making promotional edits` : `Account is a promotion-only account`}</li>
-            <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `Evidently a spambot or other unauthorised bot` : `Account is evidently a spambot or a compromised account`}</li>
-            <li class="mdl-menu__item" data-val="">Other (please enter in comment)</li> <!-- Must detect and RM this -->
+            <li class="mdl-menu__item" data-val="">解封后的一天之内进行破坏</li>
+            <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `明显只在破坏` : `明显为纯破坏用户`}</li>
+            <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `明显只在打广告` : `明显为纯广告用户`}</li>
+            <li class="mdl-menu__item" data-val="">${rw.info.isUserAnon(rw.info.targetUsername(un).replace(/_/g, ' ').replace(/"/g, "&quot;")) ? `明显为拉机机器人或其它未授权机器人` : `明显为被劫持用户或垃圾机器人`}</li>
+            <li class="mdl-menu__item" data-val="">其它（请在评论中补充）</li> <!-- Must detect and RM this -->
         </ul>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:100%">
         <input class="mdl-textfield__input" type="text" id="commentBox" name="comment">
-        <label class="mdl-textfield__label" for="commentBox">Comment</label>
+        <label class="mdl-textfield__label" for="commentBox">评论</label>
         <div class="mdl-tooltip" for="commentBox">
-            Enter additional info you'd like to attach to this report.
+            填入您想要附给举报的补充论述。
         </div>
     </div>
 
@@ -46,11 +46,11 @@ ${doNotShowDialog !== true ? `
     ${doNotShowDialog !== true ? `
         <!-- Only show on our own dialog to close -->
         <button class="mdl-button mdl-js-button mdl-js-ripple-effect" onclick="window.parent.postMessage('closeDialog', '*');">
-            CANCEL
+            取消
         </button>    
         ` :``}
     <button id="AIVsubmitBtn" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="sendAIVReport();">
-        REPORT
+        举报
     </button>
 </span>
 <script>
@@ -63,16 +63,16 @@ ${doNotShowDialog !== true ? `
                 return obj;
                 }, {}); // form data
         
-        if (data.reason == "") {pushToast("Select a reason."); return;} // If no reason selected, push toast and EXIT.
+        if (data.reason == "") {pushToast("请选择举报理由。"); return;} // If no reason selected, push toast and EXIT.
 
         let fullReason = "";
-        if (data.reason == "Other (please enter in comment)") { // If other is chosen
-            if (data.comment == "") {pushToast("Enter your reason."); return;}
-            if (data.comment.length < 5) {pushToast("Your reason is not long enough"); return;} // If no comment, or comment is not long enough (5+ chars) push toast and EXIT.
+        if (data.reason == "其它（请在评论中补充）") { // If other is chosen
+            if (data.comment == "") {pushToast("请填入理由。"); return;}
+            if (data.comment.length < 5) {pushToast("您的理由不够长。"); return;} // If no comment, or comment is not long enough (5+ chars) push toast and EXIT.
             fullReason = data.comment; // else continue and set the reason to the comment
         } else {
             // Append the reason and comment if there is one
-            fullReason = data.reason + (data.comment == "" ? "" : " - "+ data.comment); // If data comment empty don't add anything otherwise make it Reason - Comment
+            fullReason = data.reason + (data.comment == "" ? "" : "——"+ data.comment); // If data comment empty don't add anything otherwise make it Reason - Comment
         }
         fullReason += " ${rw.sign()}"; // Add sig to the end (w space)
         // Push this upstairs
@@ -84,10 +84,10 @@ ${doNotShowDialog !== true ? `
     window.onmessage = e=>{ // On any message we just set the text, not much logic here
         console.log(e);
         if (e.data == "AIVReportExist"){
-            $("#AIVreportForm").html("<h5>It looks like this user has already been reported to AIV.</h5>");
+            $("#AIVreportForm").html("<h5>这个用户的破坏好像已经被举报过了。</h5>");
             $("#AIVsubmitBtn").hide(); // hide submit button
         } else if (e.data == "UAAReportExist"){
-            $("#UAAreportForm").html("<h5>It looks like this user has already been reported to UAA.</h5>");
+            $("#UAAreportForm").html("<h5>这个用户名好像已经被举报过了。</h5>");
             $("#UAAsubmitBtn").hide(); // hide submit button
         } 
     };
