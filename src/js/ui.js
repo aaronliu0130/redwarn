@@ -31,7 +31,7 @@ rw.ui = {
                 <span class="rwNoticeCatagory"> <!-- used for search -->
                 <div class="rwNoticeCatagoryHead" style="
                     text-align: center;
-                    font-family: Roboto;
+                    font-family: Noto;
                     font-weight: 300;
                     width: 100%;
                     cursor: pointer;
@@ -45,7 +45,7 @@ rw.ui = {
             if (rw.config.rwNoticeListByTemplateName != "enable") {
                 // Standard listing by rule description
                 let style = "";
-                if (rule.name.length > 62) {
+                if (rule.name.length > 31) {
                     // Too long to fit
                     style = "font-size:14px";
                 } // TODO 03/01/2021:
@@ -61,7 +61,7 @@ rw.ui = {
             } else {
                 // List by template name
                 let style = "";
-                if (rule.name.length > 62) {
+                if (rule.name.length > 31) {
                     // Too long to fit
                     style = "font-size:14px"; // style here applies to span that will show on hover
                 }
@@ -140,12 +140,12 @@ rw.ui = {
 
                 // MAKE EDIT - summary with warning info
                 let summary = `${({
-                    "N/A": "Notice:",
-                    "1": "Note:",
-                    "2": "Caution:",
-                    "3": "Warning:",
-                    "4": "Final Warning:",
-                    "4im": "ONLY Warning:"
+                    "N/A": "告示:",
+                    "1": "通知：",
+                    "2": "注意：",
+                    "3": "警告：",
+                    "4": "最后警告：",
+                    "4im": "唯一警告："
                 })[warningLevel]
                     } ${rule}`;
 
@@ -165,8 +165,8 @@ rw.ui = {
                 `
                 <span class="material-icons" id="PastWarning" style="cursor:help;position: relative;top: 5px;padding-left: 10px;color:green;">thumb_up</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="PastWarning">
-                    <span style="font-size:x-small;">
-                    No notices this month.
+                    <span style="font-size:x-large;">
+                    本月无告示。
                     </span>
                 </div>
                 `,
@@ -175,8 +175,8 @@ rw.ui = {
                 `
                 <span class="material-icons" id="PastWarning" style="cursor:help;position: relative;top: 5px;padding-left: 10px;color:blue;">info</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="PastWarning">
-                    <span style="font-size:x-small;">
-                    Has been given a Level 1 notice this month.
+                    <span style="font-size:x-large;">
+                    本月收到过一级通知。
                     </span>
                 </div>
                 `,
@@ -184,8 +184,8 @@ rw.ui = {
                 `
                 <span class="material-icons" id="PastWarning" style="cursor:help;position: relative;top: 5px;padding-left: 10px;color:orange;">announcement</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="PastWarning">
-                    <span style="font-size:x-small;">
-                    Has been given a Level 2 caution this month.
+                    <span style="font-size:x-large;">
+                    本月收到过二级注意。
                     </span>
                 </div>
                 `,
@@ -193,8 +193,8 @@ rw.ui = {
                 `
                 <span class="material-icons" id="PastWarning" style="cursor:help;position: relative;top: 5px;padding-left: 10px; color:red;">report_problem</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="PastWarning">
-                    <span style="font-size:x-small;">
-                    Has been given a Level 3 warning this month.
+                    <span style="font-size:x-large;">
+                    本月收到过三级警告。
                     </span>
                 </div>
                 `,
@@ -203,9 +203,9 @@ rw.ui = {
                 `
                 <span class="material-icons" id="PastWarning" style="cursor:pointer;position: relative;top: 5px;padding-left: 10px;color:#a20000;" onclick="window.parent.postMessage('adminR');">report</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="PastWarning">
-                    <span style="font-size:x-small;">
-                    Has been given a Level 4 Final or ONLY warning.<br/>
-                    Click here to report to admins for vandalism. Review user page first.
+                    <span style="font-size:large;">
+                    本月收到过四级终告。<br/>
+                    点击此按钮来举报。
                     </span>
                 </div>
                 `
