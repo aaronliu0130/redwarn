@@ -165,7 +165,7 @@ rw.ui = {
                 `
                 <span class="material-icons" id="PastWarning" style="cursor:help;position: relative;top: 5px;padding-left: 10px;color:green;">thumb_up</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="PastWarning">
-                    <span style="font-size:x-large;">
+                    <span style="font-size:xx-large;">
                     本月无告示。
                     </span>
                 </div>
@@ -204,8 +204,8 @@ rw.ui = {
                 <span class="material-icons" id="PastWarning" style="cursor:pointer;position: relative;top: 5px;padding-left: 10px;color:#a20000;" onclick="window.parent.postMessage('adminR');">report</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="PastWarning">
                     <span style="font-size:large;">
-                    本月收到过四级终告。<br/>
-                    点击此按钮来举报。
+                    本月收到过终级警告。<br/>
+                    回顾用户页后点击此按钮来举报。
                     </span>
                 </div>
                 `
@@ -224,13 +224,13 @@ rw.ui = {
                 const continueFunc = () => { // split to allow for the intro dialog
                     // Check we're not warning ourselves
                     if (rw.info.getUsername() == rw.info.targetUsername(un)) {
-                        rw.ui.confirmDialog(`You cannot warn yourself.`, "OKAY", () => dialogEngine.closeDialog(), "", () => { }, 0);
+                        rw.ui.confirmDialog(`不要伤害自己，你是无辜的！`, "OKAY", () => dialogEngine.closeDialog(), "", () => { }, 0);
                         return; // stop here
                     }
 
                     // Show loading dialog as this takes time and CPU
                     rw.ui.loadDialog.show(`
-                    Looking for past warnings, please wait...
+                    寻找警告中……
                     `, true);
 
                     // Get warning info
@@ -246,42 +246,42 @@ rw.ui = {
                                     `
                                     <span class="material-icons" id="WarningHistoryIndicator${i}" style="cursor:help;position: relative;top: 5px;font-size:20px;color:BlueViolet;">error_outline</span>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="WarningHistoryIndicator${i}">
-                                        <span style="font-size:x-small;">
-                                        Recieved a reminder/policy violation notice
+                                        <span style="font-size:xx-large;">
+                                        提醒或告示
                                         </span>
                                     </div>
-                                    <span style="font-size:11px;"><b>${warning.from}</b> gave ${rw.info.targetUsername(un)} a reminder or policy violation warning for:</span>
+                                    <span style="font-size:11px;"><b>${warning.from}</b> 提醒或告示了 ${rw.info.targetUsername(un)}</span>
                                     `,
 
                                     // NOTICE
                                     `
                                     <span class="material-icons" id="WarningHistoryIndicator${i}" style="cursor:help;position: relative;top: 5px;font-size:20px;color:blue;">info</span>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="WarningHistoryIndicator${i}">
-                                        <span style="font-size:x-small;">
-                                        Level 1 notice
+                                        <span style="font-size:xx-large;">
+                                        一级通知
                                         </span>
                                     </div>
-                                    <span style="font-size:11px;"><b>${warning.from}</b> gave ${rw.info.targetUsername(un)} level 1 notice for:</span>
+                                    <span style="font-size:11px;"><b>${warning.from}</b> 一级通知了 ${rw.info.targetUsername(un)}</span>
                                     `,
-                                    // CAUTION
+                                    // CAUTION，注意能是动词吗
                                     `
                                     <span class="material-icons" id="WarningHistoryIndicator${i}" style="cursor:help;position: relative;top: 5px;font-size:20px;color:orange;">announcement</span>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="WarningHistoryIndicator${i}">
                                         <span style="font-size:x-small;">
-                                        Level 2 caution
+                                        二级注意
                                         </span>
                                     </div>
-                                    <span style="font-size:11px;"><b>${warning.from}</b> gave ${rw.info.targetUsername(un)} level 2 caution for:</span>
+                                    <span style="font-size:11px;"><b>${warning.from}</b> 二级注意了 ${rw.info.targetUsername(un)}</span>
                                     `,
                                     // Warning- in red. RedWarn, get it? This is the peak of programming humour.
                                     `
                                     <span class="material-icons" id="WarningHistoryIndicator${i}" style="cursor:help;position: relative;top: 5px;font-size:20px; color:red;">report_problem</span>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="WarningHistoryIndicator${i}">
                                         <span style="font-size:x-small;">
-                                        Level 3 warning
+                                        三级警告
                                         </span>
                                     </div>
-                                    <span style="font-size:11px;"><b>${warning.from}</b> gave ${rw.info.targetUsername(un)} level 3 warning for:</span>
+                                    <span style="font-size:11px;"><b>${warning.from}</b> 三级警告了 ${rw.info.targetUsername(un)}</span>
                                     `,
 
                                     // Final Warning (dark red)
@@ -289,11 +289,11 @@ rw.ui = {
                                     <span class="material-icons" id="WarningHistoryIndicator${i}" style="cursor:pointer;position: relative;top: 5px;font-size:20px;color:#a20000;" onclick="window.parent.postMessage('adminR');">report</span>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="WarningHistoryIndicator${i}">
                                         <span style="font-size:x-small;">
-                                        Level 4 Final warning<br/>
-                                        Click here to report to admins for vandalism. Review user page first.
+                                        终极警告<br/>
+                                        回顾用户页后点击此按钮来举报。
                                         </span>
                                     </div>
-                                    <span style="font-size:11px;"><b>${warning.from}</b> gave ${rw.info.targetUsername(un)} final warning for:</span>
+                                    <span style="font-size:11px;"><b>${warning.from}</b> 终极警告了 ${rw.info.targetUsername(un)}</span>
                                     `,
 
                                     // Only Warning (red)
@@ -301,11 +301,11 @@ rw.ui = {
                                     <span class="material-icons" id="WarningHistoryIndicator${i}" style="cursor:pointer;position: relative;top: 5px;font-size:20px;color:red;" onclick="window.parent.postMessage('adminR');">report</span>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="WarningHistoryIndicator${i}">
                                         <span style="font-size:x-small;">
-                                        Level 4 ONLY warning.<br/>
-                                        Click here to report to admins for vandalism. Review user page first.
+                                        唯一终极警告<br/>
+                                        回顾用户页后点击此按钮来举报。
                                         </span>
                                     </div>
-                                    <span style="font-size:11px;"><b>${warning.from}</b> gave ${rw.info.targetUsername(un)} ONLY warning for:</span>
+                                    <span style="font-size:11px;"><b>${warning.from}</b> 唯一警告了 ${rw.info.targetUsername(un)}</span>
                                     `,
 
                                     // Unknown
@@ -313,10 +313,10 @@ rw.ui = {
                                     <span class="material-icons" id="WarningHistoryIndicator${i}" style="cursor:help;position: relative;top: 5px;font-size:20px;color:red;">error_outline</span>
                                     <div class="mdl-tooltip mdl-tooltip--large" for="WarningHistoryIndicator${i}">
                                         <span style="font-size:x-small;">
-                                        Unknown warning
+                                        未知警告
                                         </span>
                                     </div>
-                                    <span style="font-size:11px;"><b>${warning.from}</b> gave ${rw.info.targetUsername(un)} an unknown warning</span>
+                                    <span style="font-size:11px;"><b>${warning.from}</b> 未知警告了 ${rw.info.targetUsername(un)}</span>
                                     `
                                 ][warning.level]
 
@@ -329,9 +329,10 @@ rw.ui = {
                             font-size: 11px;
                             color: #505050;
                             ">${new Date(warning.timestamp).toUTCString()} ${
+                                // 不改变日期因为toUTCString的中文版本不存在
                                 // Only show extra buttons if it's recognised, else there will be an error
                                 (warning.rule.key != "" ?
-                                    `- <a href="#" onclick="autoSelect('${warning.rule.key}', ${warning.level});">REUSE</a>`
+                                    `- <a href="#" onclick="autoSelect('${warning.rule.key}', ${warning.level});">复用</a>`
                                     : ``)}
                             </span><br/>
                             `;
@@ -349,14 +350,14 @@ rw.ui = {
                 // Prompt user with the dialog (for freezing issue)
                 if (rw.config.rwWarnUserAdvancedNoteDismissed == null) {
                     rw.ui.confirmDialog(`
-<h5>Advanced Mode</h5>
-Welcome to advanced warning mode! This feature looks through the past 50 user talk page revisions, allowing you to find and restore older warnings, and is useful for problematic editors who may have hidden warnings in the page history.<br/><br/>
-<b>Important:</b> Please be aware that this can take a while to process on longer pages with larger changes, so if the progress bar freezes, please be paitent as RedWarn is still processing in the background.
+<h5>高级警告模式</h5>
+欢迎来到高级警告模式！这个功能将在最近50个修订中查找警告，让您克服删警告的用户！<br/><br/>
+<b>请注意：</b>这个功能在有很大更改的讨论页上会加载一会儿，所以进度条卡住时，请稍安勿躁。
                     `,
-                        "Got it, thanks",
+                        "明白啦",
                         () => dialogEngine.closeDialog(continueFunc), // continue on close
 
-                        "Don't show again", () => {
+                        "别打扰我了", () => {
                             // write into config that this is the case
                             dialogEngine.closeDialog();
                             rw.config.rwWarnUserAdvancedNoteDismissed = true;
