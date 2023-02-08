@@ -433,7 +433,7 @@ rw.ui = {
         if (rw.config.rwDisableRightClickUser != "disable") {
             rw.visuals.contextMenuPromise.then(() => {
                 $(() => {
-                    $('a[href*="User_talk:"], a[href*="User:"], a[href*="Special:Contributions/"]').each((_, e) => {
+                    $('a[href*="User_talk:"], a[href*="User:"], a[href*="Special:用户贡献/"]').each((_, e) => {
                         // CALLBACK
                         let hrefOfSelection = $(e).attr("href"); // href of userpage or contribs
                         let url = new URL(hrefOfSelection, window.location.href);
@@ -452,12 +452,12 @@ rw.ui = {
                         } else {
                             // Avoid popping up if clicking contribs link on contribs page
                             // Might avoid someone from using the normal context menu
-                            if (mw.config.get('wgPageName').startsWith("Special:Contributions/")) {
+                            if (mw.config.get('wgPageName').startsWith("Special:用户贡献/")) {
                                 return;
                             }
 
                             // Contribs link, go split at last slash
-                            targetUsername = pageTitle.replace(/^Special:Contributions\/(.+)/g, "$1");
+                            targetUsername = pageTitle.replace(/^Special:用户贡献\/(.+)/g, "$1");
                         }
                         $(e).attr("data-rw-username", targetUsername);
                     });
@@ -485,9 +485,9 @@ rw.ui = {
 
                                 "tlkPg": un => redirect(rw.wikiBase + "/wiki/User_talk:" + encodeURIComponent(un), true),  // Open talk page in new tab
 
-                                "contribs": un => redirect(rw.wikiBase + "/wiki/Special:Contributions/" + encodeURIComponent(un), true),  // Redirect to contribs page in new tab
+                                "contribs": un => redirect(rw.wikiBase + "/wiki/Special:用户贡献/" + encodeURIComponent(un), true),  // Redirect to contribs page in new tab
 
-                                "accInfo": un => redirect(rw.wikiBase + "/wiki/Special:CentralAuth?target=" + encodeURIComponent(un), true),  // Redirect to Special:CentralAuth page in new tab
+                                "accInfo": un => redirect(rw.wikiBase + "/wiki/Special:中央认证?target=" + encodeURIComponent(un), true),  // Redirect to Special:CentralAuth page in new tab
 
                                 "sendMsg": un => rw.ui.newMsg(un), // show new msg dialog
 
