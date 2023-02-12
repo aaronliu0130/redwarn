@@ -523,11 +523,11 @@ rw.ui = {
                                     });
                                 },
 
-                                "filterLog": un => redirect("https://en.wikipedia.org/w/index.php?title=Special:AbuseLog&wpSearchUser=" + encodeURIComponent(un), true),  // Redirect to filter log page in new tab
+                                "filterLog": un => redirect(rw.wikiBase + "/w/index.php?title=Special:AbuseLog&wpSearchUser=" + encodeURIComponent(un), true),  // Redirect to filter log page in new tab
 
-                                "blockLog": un => redirect("https://en.wikipedia.org/w/index.php?title=Special:Log/block&page=User:" + encodeURIComponent(un), true),  // Redirect to block log page in new tab
+                                "blockLog": un => redirect(rw.wikiBase + "/w/index.php?title=Special:Log/block&page=User:" + encodeURIComponent(un), true),  // Redirect to block log page in new tab
 
-                                "allLog": un => redirect("https://en.wikipedia.org/wiki/Special:Log/" + encodeURIComponent(un), true)  // Redirect to filter log page in new tab
+                                "allLog": un => redirect(rw.wikiBase + "/wiki/Special:Log/" + encodeURIComponent(un), true)  // Redirect to filter log page in new tab
 
                             })[act](targetUsername.trim());
 
@@ -976,7 +976,7 @@ rw.ui = {
 
             // Event handlers
             addMessageHandler("redwarnPref", () => dialogEngine.closeDialog(() => rw.ui.openPreferences())); // open preferences for button press
-            addMessageHandler("redwarnTalk", () => redirect("https://en.wikipedia.org/wiki/Wikipedia_talk:RedWarn", true));
+            addMessageHandler("redwarnTalk", () => redirect(rw.wikiBase + "/wiki/Wikipedia_talk:RedWarn", true));
 
             // Email to TAS THIS IS LIVE!!
             addMessageHandler("TASEmail`*", e => dialogEngine.closeDialog(() => rw.info.sendEmail("Emergency", atob(e.split("`")[1]))));
