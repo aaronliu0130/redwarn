@@ -499,14 +499,14 @@ rw.ui = {
 
                                 "usrPronouns": un => { // Show a tost with this users prefered pronouns
                                     rw.info.getUserPronouns(un, p => {
-                                        rw.visuals.toast.show(un + "'s pronouns are " + p, false, false, 3000);
+                                        rw.visuals.toast.show(un + "的代词为" + p, false, false, 3000);
                                     });
                                 },
 
                                 "usrEditCount": un => { // Show a tost with this users prefered pronouns
                                     rw.info.getUserEditCount(un, count => {
-                                        if (count == null) count = "an unknown number of"; // stop undefined message
-                                        rw.visuals.toast.show(un + " has made " + count + " edits.", false, false, 3000);
+                                        if (count == null) count = "未知"; // stop undefined message
+                                        rw.visuals.toast.show(un + "编辑了" + count + "次。", false, false, 3000);
                                     });
                                 },
 
